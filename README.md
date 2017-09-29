@@ -12,3 +12,6 @@ We'll be using an [SR Research Eyelink 1000 eyetracker](http://www.sr-research.c
 # Analysis
 [Hedfpy](https://github.com/tknapen/hedfpy) allows easy access to raw and preprocessed eye tracking data. The analysis of gaze traces, for example, is then made a lot easier, meaning that we can show you how to analyze these data in the Jupyter Notebooks in the [notebooks](notebooks/README.md) folder. 
 
+# Syllabus 
+
+For more information on the first edition of this short course, please consult the [syllabus](syllabus/syllabus.md) (under construction).
