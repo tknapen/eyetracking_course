@@ -1,3 +1,5 @@
+**The eye is the window to the brain: as researchers, we can tell a lot from where, and how, people look around. Recently, there has been an uptick in interest in what the pupil's fluctuations can tell us about the state of people's brains. But how can you make sure that you're doing the right experiment to answer your research question?**
+
 # Eyetracking Course
 This repo contains the materials for a two-day eye-tracking course at the graduate level. 
 
