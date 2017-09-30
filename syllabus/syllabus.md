@@ -1,33 +1,10 @@
----
-title: EPOS Eye Tracking Course 2017
-author: 
-- T. Knapen
-author-meta: Cognitive Psychology, Vrije Universiteit Amsterdam, Amsterdam, the Netherlands.
-fontsize: 9
-documentclass: article
-mainfont: Myriad Pro
-mainfontoptions: Mapping=tex-text
-sansfont: Minion Pro
-sansfontoptions: Mapping=tex-text
-mathfont: Palatino
-mathfontoptions: Mapping=tex-text
-natbib: true
-biblio-style: round
-biblio-title: References
-bibliography: true
-colorlinks: true
-indent: true
-linestretch: 1.0
----
+# Syllabus
 
 **The eye is the window to the brain: as researchers, we can tell a lot from where, and how, people look around. Recently, there has been an uptick in interest in what the pupil's fluctuations can tell us about the state of people's brains. But how can you make sure that you're doing the right experiment to answer your research question?**
 
 In this two-day course we will teach you the ins and outs of eye tracking. At the end of the course, you will be able to devise and perform a 'valid' eyetracking experiment, and perform basic analyses on the resulting data. That is, we will teach you about all the things you can do with eye tracking and how to do them, with a focus on saccadic eye movements and pupil responses. 
 
 The course is short, so our goal is to give you an idea of the possibilities and pitfalls, in order to give you a solid foundation for further learning. In the course, we'll be using an SR Research EyeLink system, but the skills learned in this course will translate easily to other eye tracking systems. Furthermore, we will use only open-source tools that are available in online repositories, supporting your future experiments. We expect students to have affinity, if limited, with programming. Python is an easy language to learn, so it doesn't matter much what language you have experience in. 
-
-[//]: # pandoc --latex-engine=xelatex --template=templates/template.latex syllabus.md -f markdown -t latex -s -o pdfs/syllabus.pdf
-[//]: # pandoc syllabus.md -f markdown -t html -o html/syllabus.html
 
 ### Where?
 Practicals will be at the VU, rooms to be disclosed. [Lab website](tknapen.github.io)

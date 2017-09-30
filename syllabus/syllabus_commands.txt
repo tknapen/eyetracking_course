@@ -1,0 +1,24 @@
+---
+title: EPOS Eye Tracking Course 2017
+author: 
+- T. Knapen
+author-meta: Cognitive Psychology, Vrije Universiteit Amsterdam, Amsterdam, the Netherlands.
+fontsize: 9
+documentclass: article
+mainfont: Myriad Pro
+mainfontoptions: Mapping=tex-text
+sansfont: Minion Pro
+sansfontoptions: Mapping=tex-text
+mathfont: Palatino
+mathfontoptions: Mapping=tex-text
+natbib: true
+biblio-style: round
+biblio-title: References
+bibliography: true
+colorlinks: true
+indent: true
+linestretch: 1.0
+---
+
+[//]: # pandoc --latex-engine=xelatex --template=templates/template.latex syllabus.md -f markdown -t latex -s -o pdfs/syllabus.pdf
+[//]: # pandoc syllabus.md -f markdown -t html -o html/syllabus.html
