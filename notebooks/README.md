@@ -8,5 +8,4 @@ This folder contains the notebooks needed to analyze the data from experiments i
 - [Pupil Response Experiment](pupil_response.ipynb)
 - [Gaze Density Experiment](gaze_density.ipynb)
 
-
 Note that we'll be using Python 3.5 for the notebooks. We recommend that you use miniconda for the installation of all the required software. 

@@ -1,0 +1,41 @@
+(dp0
+S'parameterArray'
+p1
+(lp2
+(dp3
+a(dp4
+a(dp5
+a(dp6
+asS'eventArray'
+p7
+(lp8
+(lp9
+S'trial 0 started at 2.24382615089'
+p10
+aS'trial 0 phase 1 started at 2.75611710548'
+p11
+aS'trial 0 phase 2 started at 3.7536110878'
+p12
+aa(lp13
+S'trial 1 started at 3.80351114273'
+p14
+aS'trial 1 phase 1 started at 4.30365204811'
+p15
+aS'trial 1 phase 2 started at 5.35438299179'
+p16
+aa(lp17
+S'trial 2 started at 5.40661501884'
+p18
+aS'trial 2 phase 1 started at 5.92108201981'
+p19
+aS'trial 2 phase 2 started at 6.91982316971'
+p20
+aa(lp21
+S'trial 3 started at 6.96685004234'
+p22
+a(lp23
+I-99
+aF0.2730541229248047
+aaS'trial 3 event q at 7.23992705345'
+p24
+aas.
