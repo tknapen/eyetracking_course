@@ -6,8 +6,8 @@ An experiment consists of a `Session` class, and a(t least one) `Trial` class. T
 
 
 # List of Experiments
-- [Smooth Pursuit Experiment](smooth_pursuit)
-- [Saccade Trajectory Experiment](saccade_trajectory)
-- [Saccade Adaptation Experiment](saccade_adaptation)
-- [Pupil Response Experiment](pupil_response)
-- [Gaze Density Experiment](gaze_density)
+- [Smooth Pursuit Experiment](SP)
+- [Saccade Trajectory Experiment](ST)
+- [Saccade Adaptation Experiment](SA)
+- [Pupil Response Experiment](PR)
+- [Gaze Density Experiment](GD)
