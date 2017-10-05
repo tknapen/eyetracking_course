@@ -1,5 +1,4 @@
 from exptools.core.trial import Trial
-from stim import BinocularDotStimulus
 import os
 import exptools
 import json
@@ -7,30 +6,22 @@ from psychopy import logging, visual, event
 import numpy as np
 
 
-class BinocularDotsTrial(Trial):
+class GDTrial(Trial):
 
-    def __init__(self, trial_idx, config, color='r', *args, **kwargs):
+    def __init__(self, ti, config, stimulus=None, *args, **kwargs):
 
-        self.ID = trial_idx
-        self.color = color
-
-        print "YOOOO %s" % color
+        self.ID = ti
 
         phase_durations = [config['fixation_time'], config['stimulus_time']]
 
         super(
-            BinocularDotsTrial,
+            GDTrial,
             self).__init__(
             phase_durations=phase_durations,
             *args,
             **kwargs)
 
-        self.dot_stimulus = BinocularDotStimulus(screen=self.screen,
-                                                 trial=self,
-                                                 config=config,
-                                                 color=self.color,
-                                                 session=self.session)
-
+        self.image_stim = self.session.image_stims[self.parameters['stimulus']]
         size_fixation_pix = self.session.deg2pix(config['size_fixation_deg'])
 
         self.fixation = visual.GratingStim(self.screen,
@@ -41,49 +32,40 @@ class BinocularDotsTrial(Trial):
                                            color='white',
                                            sf=0)
 
+
     def draw(self, *args, **kwargs):
 
         if self.phase == 0:
             self.fixation.draw()
         elif self.phase == 1:
-            self.dot_stimulus.draw()
-            self.fixation.draw()
+            self.image_stim.draw()
+            # self.fixation.draw()
 
-        super(BinocularDotsTrial, self).draw()
+        super(GDTrial, self).draw()
 
     def run(self):
-        super(BinocularDotsTrial, self).run()
+        super(GDTrial, self).run()
 
         while not self.stopped:
 
-            if self.phase == 0:
-                if self.session.clock.getTime() - \
-                        self.start_time > self.phase_times[0]:
-                    self.phase_forward()
+            self.check_phase_time()
+            # if self.phase == 0:
+            #     self.phase_times[self.phase] = self.session.clock.getTime()
+            #     if self.phase_times[self.phase] - \
+            #             self.start_time > self.phase_durations[self.phase]:
+            #         self.phase_forward()
 
-            if self.phase == 1:
-                if self.session.clock.getTime() - \
-                        self.start_time > self.phase_times[1]:
-                    self.phase_forward()
-
-            if self.phase == 2:
-                self.stopped = True
+            # if self.phase == 1:
+            #     self.phase_times[self.phase] = self.session.clock.getTime()
+            #     if self.phase_times[self.phase] - \
+            #             self.phase_times[self.phase - 1] > self.phase_durations[self.phase]:
+            #         self.stopped = True
 
             # events and draw
             self.event()
             self.draw()
 
-        self.stop()
-
-    def stop(self):
-        super(BinocularDotsTrial, self).stop()
-
-        if self.color == 'r':
-            self.session.binocular_config['red_intensity'] = self.dot_stimulus.element_master.color[0]
-        elif self.color == 'b':
-            self.session.binocular_config['blue_intensity'] = self.dot_stimulus.element_master.color[2]
-
-        print self.color, self.session.binocular_config
+        super(GDTrial, self).stop()
 
     def event(self):
 
@@ -95,16 +77,12 @@ class BinocularDotsTrial(Trial):
                     self.stopped = True
                     self.session.stopped = True
                     print 'run canceled by user'
-                if ev in ['a', 's']:
+                if ev in ['space', ' ']:
+                    if self.phase == 0:
+                        print 'phase 0 skipped'
+                        self.phase_forward()
+                    elif self.phase == 1:
+                        print 'phase 1 skipped'
+                        self.stopped = True
 
-                    if self.color == 'r':
-                        delta = np.array([0.025, 0, 0])
-                    elif self.color == 'b':
-                        delta = np.array([0, 0, 0.025])
-
-                    if ev == 'a':
-                        self.dot_stimulus.element_master.color += delta
-                    else:
-                        self.dot_stimulus.element_master.color -= delta
-
-            super(BinocularDotsTrial, self).key_event(ev)
+            super(GDTrial, self).key_event(ev)

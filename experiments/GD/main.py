@@ -1,4 +1,4 @@
-from session import BinocularSession
+from session import GDSession
 import appnope
 
 
@@ -12,15 +12,12 @@ def main():
     # elif track_eyes == 'n':
         #tracker_on = False
 
-    initials = 'GdH'
+    initials = 'tk'
     run = 1
     appnope.nope()
 
-    ts = BinocularSession(initials, run)
+    ts = GDSession(subject_initials=initials, index_number=run)
     ts.run()
-
-    # plot_mapper_staircase(initials, run_nr)
-
 
 if __name__ == '__main__':
     main()
