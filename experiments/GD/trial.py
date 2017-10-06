@@ -32,7 +32,6 @@ class GDTrial(Trial):
                                            color='white',
                                            sf=0)
 
-
     def draw(self, *args, **kwargs):
 
         if self.phase == 0:
@@ -42,30 +41,6 @@ class GDTrial(Trial):
             # self.fixation.draw()
 
         super(GDTrial, self).draw()
-
-    def run(self):
-        super(GDTrial, self).run()
-
-        while not self.stopped:
-
-            self.check_phase_time()
-            # if self.phase == 0:
-            #     self.phase_times[self.phase] = self.session.clock.getTime()
-            #     if self.phase_times[self.phase] - \
-            #             self.start_time > self.phase_durations[self.phase]:
-            #         self.phase_forward()
-
-            # if self.phase == 1:
-            #     self.phase_times[self.phase] = self.session.clock.getTime()
-            #     if self.phase_times[self.phase] - \
-            #             self.phase_times[self.phase - 1] > self.phase_durations[self.phase]:
-            #         self.stopped = True
-
-            # events and draw
-            self.event()
-            self.draw()
-
-        super(GDTrial, self).stop()
 
     def event(self):
 
@@ -79,10 +54,8 @@ class GDTrial(Trial):
                     print 'run canceled by user'
                 if ev in ['space', ' ']:
                     if self.phase == 0:
-                        print 'phase 0 skipped'
                         self.phase_forward()
                     elif self.phase == 1:
-                        print 'phase 1 skipped'
                         self.stopped = True
 
             super(GDTrial, self).key_event(ev)
