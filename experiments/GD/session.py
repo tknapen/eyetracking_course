@@ -15,7 +15,7 @@ class GDSession(EyelinkSession):
 
         super(GDSession, self).__init__(*args, **kwargs)
 
-        self.create_screen(full_screen=True, engine='pygaze')
+        # self.create_screen(full_screen=True, engine='pygaze')
 
         config_file = os.path.join(os.path.abspath(os.getcwd()), 'default_settings.json')
 
