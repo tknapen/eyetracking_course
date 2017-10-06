@@ -44,11 +44,11 @@ class GDSession(EyelinkSession):
 
             parameters = {'stimulus': self.trial_order[ti]}
 
-            trial = GDTrial(ti,
-                                       config=self.config,
-                                       screen=self.screen,
-                                       session=self,
-                                       parameters=parameters)
+            trial = GDTrial(ID=ti,
+                           config=self.config,
+                           screen=self.screen,
+                           session=self,
+                           parameters=parameters)
             trial.run()
 
             if self.stopped == True:
