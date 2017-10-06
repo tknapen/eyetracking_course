@@ -48,7 +48,8 @@ class GDSession(EyelinkSession):
                            config=self.config,
                            screen=self.screen,
                            session=self,
-                           parameters=parameters)
+                           parameters=parameters,
+                           tracker=self.tracker)
             trial.run()
 
             if self.stopped == True:
