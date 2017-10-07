@@ -45,13 +45,13 @@ class STTrial(Trial):
             self.session.fixation.draw()
         elif self.phase == 1:
             # update fixation position
-            self.session.fixation.setPos((self.parameters['fix_x'], self.parameters['fix_x']))
+            self.session.fixation.setPos((self.parameters['fix_x'], self.parameters['fix_y']))
             self.session.fixation.draw()
         elif self.phase == 2:
            # update distractor position
-            self.session.fixation.setPos((self.parameters['distractor_x'], self.parameters['distractor_x']))
-            self.session.fixation.draw()
+            self.session.distractor.setPos((self.parameters['distractor_x'], self.parameters['distractor_y']))
             self.session.distractor.draw()
+            self.session.fixation.draw()
         elif self.phase == 3:
             self.session.fixation.draw()
 
@@ -70,7 +70,7 @@ class STTrial(Trial):
                 if ev in ['space', ' ']:
                     if self.phase == 0:
                         self.phase_forward()
-                    elif self.phase == 1:
+                    elif self.phase == 3:
                         self.stopped = True
 
             super(STTrial, self).key_event(ev)

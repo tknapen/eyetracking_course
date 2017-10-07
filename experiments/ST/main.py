@@ -1,4 +1,4 @@
-from session import GDSession
+from session import STSession
 import appnope
 
 
@@ -16,7 +16,7 @@ def main():
     run = 1
     appnope.nope()
 
-    ts = GDSession(subject_initials=initials, index_number=run, tracker_on=True)
+    ts = STSession(subject_initials=initials, index_number=run, tracker_on=False)
     ts.run()
 
 if __name__ == '__main__':

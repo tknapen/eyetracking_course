@@ -67,8 +67,9 @@ Our first tutorial will rehash those parts of Python/Numpy that we'll really nee
 - From the ocular muscles up into the brain:
     + Brainstem structures involved in oculomotor control
         * Motor commands that the brian stem sends to the ocular muscles
+        * Translation of Space into Time
     + Superior Colliculus:
-        * Translation of space into time
+        * Retinotopic Map of the Colliculus, Laminar Structure
     + Thalamus, Basal Ganglia & Substantia Nigra
     + Cerebellum
     + Cortical control of Eye Movements:
