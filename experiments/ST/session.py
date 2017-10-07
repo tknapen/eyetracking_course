@@ -30,11 +30,21 @@ class STSession(EyelinkSession):
     def create_trials(self):
         """creates trials by loading a list of jpg files from the img/ folder"""
 
-        image_files = sorted(glob.glob(os.path.join(os.path.abspath(os.getcwd()), 'imgs', '*.jpg')))
+        self.saccade_directions = np.random.rand(config['n_trials']) * 2.0 * np.pi
+        saccade_amplitude_pix = self.deg2pix(config['saccade_amplitude'])
 
-        self.image_stims = [ImageStim(self.screen, image=imf) for imf in image_files]
-        self.trial_order = np.random.permutation(len(self.image_stims))
+        saccade_path_d = np.array([np.sin(self.saccade_directions)*saccade_amplitude_pix, np.cos(self.saccade_directions)*saccade_amplitude_pix])
+        np.cumsum(saccade_path_d, axis=1)
+        
 
+        size_fixation_pix = self.deg2pix(config['size_fixation_deg'])
+        self.fixation = visual.GratingStim(self.screen,
+                                           tex='sin',
+                                           mask='circle',
+                                           size=size_fixation_pix,
+                                           texRes=512,
+                                           color='white',
+                                           sf=0)
 
     def run(self):
         """docstring for fname"""

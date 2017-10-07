@@ -54,8 +54,46 @@ Our first tutorial will rehash those parts of Python/Numpy that we'll really nee
 
 
 
+## Detailed list of topics
 
+- The eye: anatomy of eye muscles and degrees of freedom of eye movements
+- Geometry of eye movements: Listing's law
+- Motor control of the eye: Different types of eye movements:
+    + Optokinetic Nystagmus
+    + Vestibulo-Ocular Reflex
+    + Saccades, MicroSaccades and the Main Sequence
+    + Smooth Pursuit
+    + Vergence
+- From the ocular muscles up into the brain:
+    + Brainstem structures involved in oculomotor control
+        * Motor commands that the brian stem sends to the ocular muscles
+    + Superior Colliculus:
+        * Translation of space into time
+    + Thalamus, Basal Ganglia & Substantia Nigra
+    + Cerebellum
+    + Cortical control of Eye Movements:
+        * V1 in vergence
+        * MT/MST in smooth pursuit
+        * Parietal Cortex
+        * Frontal Eye Fields
+            - Movement Neurons
+            - Visual Neurons
+- Corrollary Discharge - the Efference Copy
+    + Visual Stability, or the interaction between Sensation and Action
+    + Effects of Eye Movements on Vision
+- The Guidance of Eye Movements: Salience and Target Selection
+- Eye Tracking
+    + Different Apparatuses for Eye Tracking
+    + Video-based eye trackers
+    + Eyelink Explanation:
+        * Software, how to operate
+            - Different Settings
+        * Calibration, Validation
 
-
+- the Pupil
+    + Innervation, Dilation (Myosis) and Constriction (Mydriasis)
+    + Luminance Responses
+    + Neurotransmitters: Central Influences on Pupil Size
+    
 
 

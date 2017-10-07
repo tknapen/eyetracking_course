@@ -1,5 +1,8 @@
 {
 	"size_fixation_deg":0.25,
-	"fixation_time":125,
-	"stimulus_time":15
+	"fixation_time":0.75,
+	"target_time":0.2,
+	"target_distractor_time":0.05,
+	"target_post_time":0.5,
+	"saccade_amplitude":7,
 }

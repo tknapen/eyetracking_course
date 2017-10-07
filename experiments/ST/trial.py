@@ -12,7 +12,7 @@ class STTrial(Trial):
 
         self.ID = ti
 
-        phase_durations = [config['fixation_time'], config['stimulus_time']]
+        phase_durations = [config['fixation_time'], config['target_time'], config['target_distractor_time'], config['target_post_time']]
 
         super(
             STTrial,
@@ -21,7 +21,6 @@ class STTrial(Trial):
             *args,
             **kwargs)
 
-        self.image_stim = self.session.image_stims[self.parameters['stimulus']]
         size_fixation_pix = self.session.deg2pix(config['size_fixation_deg'])
 
         self.fixation = visual.GratingStim(self.screen,
@@ -32,13 +31,29 @@ class STTrial(Trial):
                                            color='white',
                                            sf=0)
 
+        self.distractor = visual.GratingStim(self.screen,
+                                           tex='sin',
+                                           mask='circle',
+                                           size=size_fixation_pix,
+                                           texRes=512,
+                                           color='white',
+                                           sf=0)
+
     def draw(self, *args, **kwargs):
 
         if self.phase == 0:
-            self.fixation.draw()
+            self.session.fixation.draw()
         elif self.phase == 1:
-            self.image_stim.draw()
-            # self.fixation.draw()
+            # update fixation position
+            self.session.fixation.setPos((self.parameters['fix_x'], self.parameters['fix_x']))
+            self.session.fixation.draw()
+        elif self.phase == 2:
+           # update distractor position
+            self.session.fixation.setPos((self.parameters['distractor_x'], self.parameters['distractor_x']))
+            self.session.fixation.draw()
+            self.session.distractor.draw()
+        elif self.phase == 3:
+            self.session.fixation.draw()
 
         super(STTrial, self).draw()
 
