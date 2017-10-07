@@ -1,9 +1,11 @@
+import sys
 from session import STSession
 import appnope
 
 
 def main():
-    #initials = raw_input('Your initials: ')
+    initials = sys.argv[1]
+    # raw_input('Your initials: ')
     #run_nr = int(raw_input('Run number: '))
     #scanner = raw_input('Are you in the scanner (y/n)?: ')
     #track_eyes = raw_input('Are you recording gaze (y/n)?: ')
@@ -12,7 +14,7 @@ def main():
     # elif track_eyes == 'n':
         #tracker_on = False
 
-    initials = 'tk'
+    # initials = 'tk'
     run = 1
     appnope.nope()
 

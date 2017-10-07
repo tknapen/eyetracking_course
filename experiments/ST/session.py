@@ -112,6 +112,8 @@ class STSession(EyelinkSession):
                 'distractor_direction': self.saccade_distractor_directions[ti,1],
             }
 
+            parameters.update(self.config)
+
             trial = STTrial(ti=ti,
                            config=self.config,
                            screen=self.screen,

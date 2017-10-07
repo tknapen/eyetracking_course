@@ -44,6 +44,8 @@ class GDSession(EyelinkSession):
 
             parameters = {'stimulus': self.trial_order[ti]}
 
+            parameters.update(self.config)
+            
             trial = GDTrial(ti=ti,
                            config=self.config,
                            screen=self.screen,

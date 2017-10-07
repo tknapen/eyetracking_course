@@ -1,8 +1,10 @@
+import sys
 from session import GDSession
 import appnope
 
 
 def main():
+    initials = sys.argv[1]
     #initials = raw_input('Your initials: ')
     #run_nr = int(raw_input('Run number: '))
     #scanner = raw_input('Are you in the scanner (y/n)?: ')
