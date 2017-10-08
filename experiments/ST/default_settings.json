@@ -8,5 +8,5 @@
 	"saccade_amplitude":7,
 	"n_trials":240,
 	"max_eccentricity":12,
-	"distractor_deviation_angle":45
+	"distractor_deviation_angle":30
 }
