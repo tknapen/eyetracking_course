@@ -2,7 +2,9 @@
 	"size_dot_deg":0.25,
 	"diameter_dotcloud_deg":15,
 	"size_fixation_deg":0.25,
-	"speed_dot_deg":0.0005,
-	"nDots":100,
-	"noiseDots":"direction"
+	"speed_dot_deg":0.00025,
+	"nDots":400,
+	"noiseDots":"direction",
+	"dotLife":10,
+	"nTrials":50
 }
