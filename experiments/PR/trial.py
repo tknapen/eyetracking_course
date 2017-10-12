@@ -30,17 +30,14 @@ class PRTrial(Trial):
             self.session.fixation.draw()
 
         elif self.phase == 1:
-            self.session.dots.coherence = 0.0
             self.session.fixation.draw()
             self.session.dots.draw()
 
         elif self.phase == 2:
-            self.session.dots.coherence = 1.0
             self.session.fixation.draw()
             self.session.dots.draw()
 
         elif self.phase == 3:
-            self.session.dots.coherence = 0.0
             self.session.fixation.draw()
             self.session.dots.draw()
 
@@ -57,3 +54,14 @@ class PRTrial(Trial):
                     print 'run canceled by user'
 
             super(PRTrial, self).key_event(ev)
+
+    def phase_forward(self):
+
+        super(PRTrial, self).phase_forward()
+
+        if self.phase == 1:
+            self.session.dots.coherence = 0.0
+        elif self.phase == 2:
+            self.session.dots.coherence = 1.0
+        elif self.phase == 3:
+            self.session.dots.coherence = 0.0
