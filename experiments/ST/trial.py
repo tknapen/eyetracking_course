@@ -21,24 +21,6 @@ class STTrial(Trial):
             *args,
             **kwargs)
 
-        size_fixation_pix = self.session.deg2pix(config['size_fixation_deg'])
-
-        self.fixation = visual.GratingStim(self.screen,
-                                           tex='sin',
-                                           mask='circle',
-                                           size=size_fixation_pix,
-                                           texRes=512,
-                                           color='white',
-                                           sf=0)
-
-        self.distractor = visual.GratingStim(self.screen,
-                                           tex='sin',
-                                           mask='circle',
-                                           size=size_fixation_pix,
-                                           texRes=512,
-                                           color='white',
-                                           sf=0)
-
     def draw(self, *args, **kwargs):
 
         if self.phase == 0:
