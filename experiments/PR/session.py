@@ -47,7 +47,7 @@ class PRSession(EyelinkSession):
                                            mask='circle',
                                            size=size_fixation_pix,
                                            texRes=512,
-                                           color='red',
+                                           color='white',
                                            sf=0)
 
         self.dots = visual.DotStim(self.screen, 
