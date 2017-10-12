@@ -57,6 +57,8 @@ class PRSession(EyelinkSession):
                                    dotSize=size_dot_pix,
                                    nDots=self.config['nDots'], 
                                    noiseDots=self.config['noiseDots'],
+                                   signalDots='direction',
+                                   dotLife=self.config['dotLife'],
                                    coherence=0.0)
 
         print self.config
