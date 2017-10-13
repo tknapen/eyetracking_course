@@ -1,0 +1,14 @@
+{
+    "TR":								1,
+    "sp_path_amplitude":                15,
+    "sp_path_elevation":                0.7,
+    "minimal_iti":                      2,
+    "warming_up_n_TRs":                 0,
+    "test_stim_y_offset":               1.5,
+    "test_stim_height":                 2,
+    "test_stim_width":                  0.4,
+    "sp_target_size":                   0.5,
+    "sp_path_temporal_frequency":       0.5,
+    "test_stim_positions":              [-3,-1,0,1,3],
+    "stim_color":						[0,0,0]
+}
