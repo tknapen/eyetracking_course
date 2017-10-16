@@ -64,9 +64,9 @@ class PRTrial(Trial):
         super(PRTrial, self).phase_forward()
 
         if self.phase == 1:
-            self.session.dots.coherence = 0.0
+            self.session.dots.kappa = 0.0
         elif self.phase == 2:
-            self.session.dots.coherence = 1.0
-            self.session.dots.direction = self.parameters['direction']
+            self.session.dots.kappa = 50
+            self.session.dots.dir = self.parameters['direction']
         elif self.phase == 3:
-            self.session.dots.coherence = 0.0
+            self.session.dots.kappa = 0.0
