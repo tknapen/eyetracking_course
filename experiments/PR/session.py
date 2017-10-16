@@ -30,11 +30,11 @@ class PRSession(EyelinkSession):
     def create_trials(self):
         """creates trials by creating a restricted random walk through the display from trial to trial"""
 
-        self.trial_parameters = [{'fixation_duration': np.random.exponential(2),
-                                  'random_dots1_duration' : np.random.exponential(2),
-                                  'coherent_dots_duration': np.random.exponential(2),
-                                  'random_dots2_duration': np.random.exponential(2),
-                                  'direction':np.random.choice([0, 180])
+        self.trial_parameters = [{'fixation_duration': 1 + np.random.exponential(1.5),
+                                  'random_dots1_duration' : 1 + np.random.exponential(1.5),
+                                  'coherent_dots_duration': 1 + np.random.exponential(1.5),
+                                  'random_dots2_duration': 1 + np.random.exponential(1.5),
+                                  'direction':np.random.choice([0, 180], 1)
                                   } for i in xrange(self.config['nTrials'])]
 
     def setup_stimuli(self):
