@@ -1,7 +1,7 @@
 from exptools.core.session import EyelinkSession
 from trial import SPTrial
 from psychopy import clock
-from psychopy.visual import ImageStim, PatchStim, Rect
+from psychopy.visual import ImageStim, PatchStim, Rect, TextStim
 import numpy as np
 import os
 import exptools
@@ -24,18 +24,34 @@ class SPSession(EyelinkSession):
         self.config = config
         self.create_trials()
 
+        # define the effective screen dimensions for stimulus presentation
+        self.ywidth = (1-config['sp_path_elevation'])*self.screen.size[1]*2
+
+
         self.stopped = False
 
     def create_trials(self):
         """creates trials"""
 
+        this_instruction_string = 'Determine whether the second flash is more left or right of the first.'
+        self.instruction = TextStim(self.screen, 
+            text = this_instruction_string, 
+            font = 'Helvetica Neue',
+            pos = (0, 0),
+            italic = True, 
+            height = 30, 
+            alignHoriz = 'center',
+            color=self.config['stim_color'])
+        self.instruction.setSize((1200,50))
 
         # combining all 5 positions gives 5x5=25 possible location combinations
         x_test_positions = np.array(np.meshgrid(self.config['test_stim_positions'], self.config['test_stim_positions'])).T.reshape((-1,2))
-        x1, x2 = x_test_positions[:,0], x_test_positions[:,1]
+        # x1, x2 = x_test_positions[:,0], x_test_positions[:,1]
+        x1, x2 = np.zeros_like(x_test_positions[:,0]), x_test_positions[:,1]
 
         # y position is above or below fp
-        y_test_positions = np.concatenate((-1 * np.ones(x_test_positions.shape[0]), np.ones(x_test_positions.shape[0])))
+        # y_test_positions = np.concatenate((-1 * np.ones(x_test_positions.shape[0]), np.ones(x_test_positions.shape[0])))
+        y_test_positions = np.concatenate((-1*np.ones(x_test_positions.shape[0]), -1*np.ones(x_test_positions.shape[0])))
 
         # tile them 4 times, so that we have 25*4=100 trials
         x_test_positions_tiled = np.array([np.tile(x1, 4), np.tile(x2, 4)]).T
@@ -97,13 +113,32 @@ class SPSession(EyelinkSession):
 
         # define all durations per trial
         self.phase_durations = np.array([[
-            -0.0001, # instruct time, skipped in all trials but the first (wait for t)
+            3, # instruct time, skipped in all trials but the first (wait for t)
             ITI * self.config['TR'], # smooth pursuit before stim
             self.config['TR'], # smooth pursuit after stim 1
             self.config['TR'] # smooth pursuit after stim 2
             ] for ITI in ITIs] )    
 
+        # fixation point
+        # self.fixation_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=12.5, pos = np.array((0.0,0.0)), color = (-1.0,-1.0,-1.0), maskParams = {'fringeWidth':0.4})
+        # self.fixation_outer_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=22.5, pos = np.array((0.0,0.0)), color = (0.0,0.0,0.0), maskParams = {'fringeWidth':0.4})
+        # self.fixation = PatchStim(self.screen, mask='raisedCos',tex=None, size=9.0, pos = np.array((0.0,0.0)), color = (1.0,1.0,1.0), opacity = 1.0, maskParams = {'fringeWidth':0.4})
+
+        # self.fixation_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=35, pos = np.array((0.0,0.0)), color = (-1.0,-1.0,-1.0), maskParams = {'fringeWidth':0.4})
+        # self.fixation_outer_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=45, pos = np.array((0.0,0.0)), color = (0.0,0.0,0.0), maskParams = {'fringeWidth':0.4})
+        # self.fixation = PatchStim(self.screen, mask='raisedCos',tex=None, size=50, pos = np.array((0.0,0.0)), color = (1.0,1.0,1.0), opacity = 1.0, maskParams = {'fringeWidth':0.4})
+        
         self.fixation = PatchStim(self.screen,
+            mask='raisedCos',
+            tex=None, 
+            size=self.config['sp_target_size']*self.pixels_per_degree, 
+            pos = np.array((0.0,self.config['sp_target_size']*self.pixels_per_degree)), 
+            color = self.config['stim_color'], 
+            opacity = 1.0, 
+            maskParams = {'fringeWidth':0.4})
+
+        
+        self.center = PatchStim(self.screen,
             mask='raisedCos',
             tex=None, 
             size=self.config['sp_target_size']*self.pixels_per_degree, 
@@ -153,14 +188,14 @@ class SPSession(EyelinkSession):
                                     'warming_up_n_TRs':self.config['warming_up_n_TRs']
                                     }
 
-            self.all_trials.append(SPTrial(i,this_trial_parameters, phase_durations = self.phase_durations[i], session = self, screen = self.screen, tracker = self.tracker))
+            self.all_trials.append(SPTrial(i,this_trial_parameters, self.phase_durations[i], session = self, screen = self.screen, tracker = self.tracker))
 
     def run(self):
         """docstring for fname"""
         # cycle through trials
         for i, trial in enumerate(self.all_trials):
             # run the prepared trial
-            trial.run(ID = i)
+            trial.run()
             if self.stopped == True:
                 break
         self.close()
