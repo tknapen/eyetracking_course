@@ -6,6 +6,7 @@ import os
 import exptools
 import json
 import glob
+from stimulus import VonMisesDotStim
 
 
 class PRSession(EyelinkSession):
@@ -50,24 +51,23 @@ class PRSession(EyelinkSession):
                                            color='white',
                                            sf=0)
 
-        self.dots = visual.DotStim(self.screen, 
-                                   fieldSize=size_dotfield_pix,
-                                   fieldShape='circle',
-                                   speed=speed_dot_pix,
-                                   dotSize=size_dot_pix,
-                                   nDots=self.config['nDots'], 
-                                   noiseDots=self.config['noiseDots'],
-                                   signalDots='direction',
-                                   dotLife=self.config['dotLife'],
-                                   coherence=0.0)
+        self.dots = VonMisesDotStim(self.screen, 
+                                    kappa=1,
+                                    fieldSize=size_dotfield_pix,
+                                    fieldShape='circle',
+                                    speed=speed_dot_pix,
+                                    dotSize=size_dot_pix,
+                                    nDots=self.config['nDots'], 
+                                    noiseDots=self.config['noiseDots'],
+                                    signalDots='direction',
+                                    dotLife=self.config['dotLife'],
+                                    coherence=0.0)
 
-        print self.config
 
     def run(self):
         """run the session"""
         # cycle through trials
 
-        print self.trial_parameters
 
         for trial_id, parameters in enumerate(self.trial_parameters):
             trial = PRTrial(ti=trial_id,
