@@ -30,12 +30,13 @@ class PRSession(EyelinkSession):
     def create_trials(self):
         """creates trials by creating a restricted random walk through the display from trial to trial"""
 
-        self.trial_parameters = [{'fixation_duration': 1 + np.random.exponential(1.5),
+        self.trial_parameters = [{'fixation_duration': 0, #1 + np.random.exponential(1.5),
                                   'random_dots1_duration' : 1 + np.random.exponential(1.5),
                                   'coherent_dots_duration': 1 + np.random.exponential(1.5),
                                   'random_dots2_duration': 1 + np.random.exponential(1.5),
                                   'direction':np.random.choice([0, 180], 1)
                                   } for i in xrange(self.config['nTrials'])]
+        self.trial_parameters[0]['fixation_duration'] = 30
 
     def setup_stimuli(self):
         size_fixation_pix = self.deg2pix(self.config['size_fixation_deg'])
@@ -63,6 +64,16 @@ class PRSession(EyelinkSession):
                                     dotLife=self.config['dotLife'],
                                     coherence=0.0)
 
+        this_instruction_string = """What direction do the dots start to move in?\nPress 'f' for left and 'j' for right. \nPress either key to start."""
+        self.instruction = visual.TextStim(self.screen, 
+            text = this_instruction_string, 
+            font = 'Helvetica Neue',
+            pos = (0, 0),
+            italic = True, 
+            height = 20, 
+            alignHoriz = 'center',
+            color=(1,0,0))
+        self.instruction.setSize((1200,50))
 
     def run(self):
         """run the session"""
@@ -70,6 +81,7 @@ class PRSession(EyelinkSession):
 
 
         for trial_id, parameters in enumerate(self.trial_parameters):
+
             trial = PRTrial(ti=trial_id,
                            config=self.config,
                            screen=self.screen,

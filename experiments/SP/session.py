@@ -33,13 +33,13 @@ class SPSession(EyelinkSession):
     def create_trials(self):
         """creates trials"""
 
-        this_instruction_string = 'Determine whether the second flash is more left or right of the first.'
+        this_instruction_string = """Determine whether the second flash is more left or right of the first.\nPress 'f' for left and 'j' for right. \nPress either key to start."""
         self.instruction = TextStim(self.screen, 
             text = this_instruction_string, 
             font = 'Helvetica Neue',
             pos = (0, 0),
             italic = True, 
-            height = 30, 
+            height = 20, 
             alignHoriz = 'center',
             color=self.config['stim_color'])
         self.instruction.setSize((1200,50))
@@ -69,17 +69,22 @@ class SPSession(EyelinkSession):
         y_test_positions_tiled_shuffled = y_test_positions_tiled[self.trial_order]
         eye_dir_shuffled = eye_dir[self.trial_order]
 
-        ITIs = np.zeros(len(self.trial_order))#*self.config['minimal_iti']
+        ITIs = np.zeros(len(self.trial_order))
         # and here's the distribution of ITIs:
+        # unique_ITIs = {
+        # 1: 37,
+        # 2: 22,
+        # 3: 15,
+        # 4: 10,
+        # 5: 7,
+        # 6: 4,
+        # 7: 3,
+        # 8: 2
+        # }
+
         unique_ITIs = {
-        1: 37,
-        2: 22,
-        3: 15,
-        4: 10,
-        5: 7,
-        6: 4,
-        7: 3,
-        8: 2
+        1: 50,
+        2: 50
         }
 
         # randomly distribute ITI's over the trial combinations:
@@ -113,36 +118,17 @@ class SPSession(EyelinkSession):
 
         # define all durations per trial
         self.phase_durations = np.array([[
-            3, # instruct time, skipped in all trials but the first (wait for t)
+            10, # instruct time, skipped in all trials but the first (wait for t)
             ITI * self.config['TR'], # smooth pursuit before stim
             self.config['TR'], # smooth pursuit after stim 1
             self.config['TR'] # smooth pursuit after stim 2
             ] for ITI in ITIs] )    
-
-        # fixation point
-        # self.fixation_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=12.5, pos = np.array((0.0,0.0)), color = (-1.0,-1.0,-1.0), maskParams = {'fringeWidth':0.4})
-        # self.fixation_outer_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=22.5, pos = np.array((0.0,0.0)), color = (0.0,0.0,0.0), maskParams = {'fringeWidth':0.4})
-        # self.fixation = PatchStim(self.screen, mask='raisedCos',tex=None, size=9.0, pos = np.array((0.0,0.0)), color = (1.0,1.0,1.0), opacity = 1.0, maskParams = {'fringeWidth':0.4})
-
-        # self.fixation_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=35, pos = np.array((0.0,0.0)), color = (-1.0,-1.0,-1.0), maskParams = {'fringeWidth':0.4})
-        # self.fixation_outer_rim = PatchStim(self.screen, mask='raisedCos',tex=None, size=45, pos = np.array((0.0,0.0)), color = (0.0,0.0,0.0), maskParams = {'fringeWidth':0.4})
-        # self.fixation = PatchStim(self.screen, mask='raisedCos',tex=None, size=50, pos = np.array((0.0,0.0)), color = (1.0,1.0,1.0), opacity = 1.0, maskParams = {'fringeWidth':0.4})
         
         self.fixation = PatchStim(self.screen,
             mask='raisedCos',
             tex=None, 
             size=self.config['sp_target_size']*self.pixels_per_degree, 
             pos = np.array((0.0,self.config['sp_target_size']*self.pixels_per_degree)), 
-            color = self.config['stim_color'], 
-            opacity = 1.0, 
-            maskParams = {'fringeWidth':0.4})
-
-        
-        self.center = PatchStim(self.screen,
-            mask='raisedCos',
-            tex=None, 
-            size=self.config['sp_target_size']*self.pixels_per_degree, 
-            pos = np.array((0.0,0.0)), 
             color = self.config['stim_color'], 
             opacity = 1.0, 
             maskParams = {'fringeWidth':0.4})
@@ -165,7 +151,6 @@ class SPSession(EyelinkSession):
                             fillColor = self.config['stim_color'])
 
         self.start_time = 0.0
-        # self.cumulative_phase_durations = np.cumsum(np.r_[0,self.phase_durations[self.trial_order,1:].ravel()][:-1]).reshape((self.phase_durations.shape[0], -1))
         self.cumulative_phase_durations = np.cumsum(np.r_[0,self.phase_durations[:,1:].ravel()][:-1]).reshape((self.phase_durations.shape[0], -1))
 
         self.all_trials = []

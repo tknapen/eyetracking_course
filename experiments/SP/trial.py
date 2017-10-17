@@ -34,30 +34,10 @@ class SPTrial(Trial):
         y_pos = self.screen.size[1]*self.parameters['sp_path_elevation']-self.screen.size[1]/2
         self.session.fixation.setPos([x_pos,y_pos])
 
-    def draw(self):
-
-        """docstring for draw"""
-
-        # print 'drawing phase %i'%self.phase
-
-        # the position of the dot is determined based
-        # on the session time
-        if (self.phase == 0) * (self.ID == 0):
-            draw_time = 0         
-        else:
-            draw_time = self.session.clock.getTime() - self.session.start_time
-
-        fp_y = self.screen.size[1]*self.parameters['sp_path_elevation']-self.screen.size[1]/2
-
-        self.session.center.setPos([0,fp_y])
-        self.session.center.draw()
-
-        self.update_fix_pos(draw_time)
-        # self.session.fixation_outer_rim.draw()
-        # self.session.fixation_rim.draw()
-        self.session.fixation.draw()
-
+    def create_stimuli(self):
+        """create_stimuli updates positions of tests"""
         # determine location of flash stimuli
+        fp_y = self.screen.size[1]*self.parameters['sp_path_elevation']-self.screen.size[1]/2
         target_y_offset = self.parameters['y_order']*self.parameters['test_stim_y_offset']*self.session.pixels_per_degree
       
         x_pos_1 = self.parameters['x_pos_1']*self.session.pixels_per_degree
@@ -67,6 +47,21 @@ class SPTrial(Trial):
         x_pos_2 = self.parameters['x_pos_2']*self.session.pixels_per_degree
         y_pos_2 = fp_y - target_y_offset
         self.session.test_stim_2.setPos([x_pos_2,y_pos_2 ])
+
+    def draw(self):
+        """docstring for draw"""
+
+        # the position of the dot is determined based
+        # on the session time
+        if (self.phase == 0) * (self.ID == 0):
+            draw_time = 0         
+        else:
+            draw_time = self.session.clock.getTime() - self.session.start_time
+
+        self.update_fix_pos(draw_time)
+        # self.session.fixation_outer_rim.draw()
+        # self.session.fixation_rim.draw()
+        self.session.fixation.draw()
 
         # draw additional stimuli:
         if (self.phase == 0 ) * (self.ID == 0):
@@ -90,34 +85,23 @@ class SPTrial(Trial):
         for ev in event.getKeys():
             if len(ev) > 0:
                 if ev in ['esc', 'escape', 'q']:
-                    # self.events.append([-99,self.session.clock.getTime()-self.start_time])
                     self.stopped = True
                     self.session.stopped = True
                     print 'run canceled by user'
                 # it handles both numeric and lettering modes 
-                elif ev == 't': # TR pulse
-                    # self.events.append([99,self.session.clock.getTime()-self.start_time])
+                # elif ev == ' ': # TR pulse
+                #     print('space bar presssed')
+
+                elif ev in ('f','j'):
                     if (self.phase == 0) * (self.ID == 0):
+                        print('fj presssed in ID and phase 00')
                         self.session.start_time = self.session.clock.getTime()
                         self.start_time = self.session.clock.getTime()
                         self.trial_onset_time = self.session.cumulative_phase_durations[self.ID,0] + self.session.start_time
-                        # print 'trial %d start time %.2f'%(self.ID,self.trial_onset_time)
-                        self.phase_forward()
-                # elif ev in self.session.response_button_signs.keys():
-                #     log_msg = 'trial ' + str(self.ID) + ' key: ' + str(ev) + ' at time: ' + str(self.session.clock.getTime())
-                #     # first check, do we even need an answer?
-                #     self.events.append( log_msg )
-                #     if self.session.tracker:
-                #         self.session.tracker.log( log_msg )
-
-                log_msg = 'trial ' + str(self.ID) + ' key: ' + str(ev) + ' at time: ' + str(self.session.clock.getTime())
-                print log_msg
-                # add to tracker log
-                if self.session.tracker:
-                    self.session.tracker.log( log_msg )                
-                # add to self.events for adding to behavioral pickle
-                self.events.append(log_msg)
+                        self.phase_forward()                    
+                    else:
+                        self.parameters['answer'] = ['f','j'].index(ev)
         
-            super(SPTrial, self).key_event( ev )
+            super(SPTrial, self).key_event(ev)
 
         

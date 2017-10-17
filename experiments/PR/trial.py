@@ -30,6 +30,10 @@ class PRTrial(Trial):
 
     def draw(self, *args, **kwargs):
 
+        # draw additional stimuli:
+        if (self.phase == 0 ) * (self.ID == 0):
+                self.session.instruction.draw()
+
         if self.phase == 0:
             self.session.fixation.draw()
 
@@ -57,6 +61,12 @@ class PRTrial(Trial):
                     self.session.stopped = True
                     print 'run canceled by user'
 
+                elif ev in ('f','j'):
+                    if (self.phase == 0) * (self.ID == 0):
+                        self.phase_forward()                    
+                    else:
+                        self.parameters['answer'] = ['f','j'].index(ev)
+
             super(PRTrial, self).key_event(ev)
 
     def phase_forward(self):
@@ -66,7 +76,7 @@ class PRTrial(Trial):
         if self.phase == 1:
             self.session.dots.kappa = 0.0
         elif self.phase == 2:
-            self.session.dots.kappa = 50
+            self.session.dots.kappa = self.session.config['kappa']
             self.session.dots.dir = self.parameters['direction']
         elif self.phase == 3:
             self.session.dots.kappa = 0.0
