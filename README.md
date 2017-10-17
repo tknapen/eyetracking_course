@@ -17,3 +17,24 @@ We'll be using an [SR Research Eyelink 1000 eyetracker](http://www.sr-research.c
 # Syllabus 
 
 For more information on the first edition of this short course, please consult the [syllabus](syllabus/syllabus.md) (under construction).
+
+# Install procedure
+The following is just a section for reference 
+```
+pip install hedfpy==0.0.dev3 fir mne lmfit 
+conda install seaborn pytables
+
+mkdir Downloads
+cd Downloads 
+wget https://github.com/git-lfs/git-lfs/releases/download/v2.3.3/git-lfs-linux-amd64-2.3.3.tar.gz
+tar xvzf git-lfs-linux-amd64-2.3.3.tar.gz
+cd git-lfs-2.3.3/
+
+mkdir ~/bin
+cp git-lfs ~/bin
+export PATH=$HOME/bin:$PATH
+
+cd ~/shared/eyetracking_course
+git install git-lfs
+git lfs fetch --all
+```
