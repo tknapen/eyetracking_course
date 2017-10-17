@@ -19,10 +19,15 @@ We'll be using an [SR Research Eyelink 1000 eyetracker](http://www.sr-research.c
 For more information on the first edition of this short course, please consult the [syllabus](syllabus/syllabus.md) (under construction).
 
 # Install procedure
-The following is just a section for reference 
+It may be necessary to perform these steps once the jupyterhub server goes down.
+
 ```
+#!/usr/bin/env bash
+
 pip install hedfpy==0.0.dev3 fir mne lmfit 
 conda install seaborn pytables
+# conda install -c conda-forge nbgrader
+# jupyter nbextension enable nbgrader --py --sys-prefix
 
 mkdir Downloads
 cd Downloads 
@@ -35,7 +40,6 @@ cp git-lfs ~/bin
 export PATH=$HOME/bin:$PATH
 git install git-lfs
 
-cd ~/shared 
 git clone https://github.com/tknapen/eyetracking_course.git
 cd eyetracking_course
 git lfs fetch --all
