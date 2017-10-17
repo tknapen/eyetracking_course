@@ -1,7 +1,7 @@
 **The eye is the window to the brain: as researchers, we can tell a lot from where, and how, people look around. Recently, there has been an uptick in interest in what the pupil's fluctuations can tell us about the state of people's brains. But how can you make sure that you're doing the right experiment to answer your research question?**
 
 # Eyetracking Course
-This repo contains the materials for a two-day eye-tracking course at the graduate level. 
+This repo contains the materials for a two-day eye-tracking course at the graduate level. For data files, it uses `git-lfs`, so this needs to be installed. 
 
 We are at present developing the experiments and materials for the course. The first iteration of this course will be held on October 19-20 2017 at the Vrije Universiteit Amsterdam. The course is open to anyone, official [EPOS](https://www.eposgradnet.nl) credits can be received after succesful completion.
 
