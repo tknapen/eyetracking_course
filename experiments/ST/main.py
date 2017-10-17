@@ -18,7 +18,7 @@ def main():
     run = 1
     appnope.nope()
 
-    ts = STSession(subject_initials=initials, index_number=run, tracker_on=False)
+    ts = STSession(subject_initials=initials, index_number=run, tracker_on=True)
     ts.run()
 
 if __name__ == '__main__':
