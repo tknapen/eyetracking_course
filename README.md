@@ -33,8 +33,10 @@ cd git-lfs-2.3.3/
 mkdir ~/bin
 cp git-lfs ~/bin
 export PATH=$HOME/bin:$PATH
-
-cd ~/shared/eyetracking_course
 git install git-lfs
+
+cd ~/shared 
+git clone https://github.com/tknapen/eyetracking_course.git
+cd eyetracking_course
 git lfs fetch --all
 ```
