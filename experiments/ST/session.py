@@ -97,6 +97,18 @@ class STSession(EyelinkSession):
                                            color='white',
                                            sf=0,
                                            pos=(0,0))
+
+        this_instruction_string = """Follow the red dot with your gaze. Press 'space' to start. """
+        self.instruction = visual.TextStim(self.screen, 
+            text = this_instruction_string, 
+            font = 'Helvetica Neue',
+            pos = (0, 0),
+            italic = True, 
+            height = 20, 
+            alignHoriz = 'center',
+            color=(1,0,0))
+        self.instruction.setSize((1200,50))
+
     def run(self):
         """run the session"""
         # cycle through trials
@@ -113,6 +125,9 @@ class STSession(EyelinkSession):
             }
 
             parameters.update(self.config)
+
+            if ti == 0:
+                parameters['fixation_time'] = 30.0
 
             trial = STTrial(ti=ti,
                            config=self.config,

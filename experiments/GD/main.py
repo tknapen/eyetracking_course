@@ -14,11 +14,11 @@ def main():
     # elif track_eyes == 'n':
         #tracker_on = False
 
-    initials = 'tk'
+    # initials = 'tk'
     run = 1
     appnope.nope()
 
-    ts = GDSession(subject_initials=initials, index_number=run, tracker_on=True)
+    ts = GDSession(subject_initials=initials, index_number=run, tracker_on=False)
     ts.run()
 
 if __name__ == '__main__':

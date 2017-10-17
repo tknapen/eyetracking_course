@@ -8,11 +8,11 @@ import numpy as np
 
 class STTrial(Trial):
 
-    def __init__(self, ti, config, stimulus=None, *args, **kwargs):
+    def __init__(self, ti, config, stimulus=None, parameters=None, *args, **kwargs):
 
         self.ID = ti
 
-        phase_durations = [config['fixation_time'], config['target_time'], config['target_distractor_time'], config['target_post_time']]
+        phase_durations = [parameters['fixation_time'], parameters['target_time'], parameters['target_distractor_time'], parameters['target_post_time']]
 
         super(
             STTrial,
@@ -21,8 +21,13 @@ class STTrial(Trial):
             *args,
             **kwargs)
 
+        self.parameters = parameters
+
     def draw(self, *args, **kwargs):
 
+        # draw additional stimuli:
+        if (self.phase == 0 ) * (self.ID == 0):
+                self.session.instruction.draw()
         if self.phase == 0:
             self.session.fixation.draw()
         elif self.phase == 1:
