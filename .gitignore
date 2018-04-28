@@ -104,3 +104,7 @@ ENV/
 *.pkl
 
 
+*.mp4
+*.tsv
+*.mkv
+*.avi
