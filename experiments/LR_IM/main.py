@@ -5,7 +5,7 @@ import appnope
 
 def main():
     initials = sys.argv[1]
-    index_number = sys.argv[2]
+    index_number = int(sys.argv[2])
     # raw_input('Your initials: ')
     #run_nr = int(raw_input('Run number: '))
     #scanner = raw_input('Are you in the scanner (y/n)?: ')

@@ -6,6 +6,7 @@ import os
 import exptools
 import json
 import glob
+import random
 
 
 class LR_IMSession(EyelinkSession):
@@ -35,14 +36,23 @@ class LR_IMSession(EyelinkSession):
         for i in xrange(self.config['n_trials']):
             for j, side in enumerate(sides):
                 for k, shape in enumerate(shapes):
-                    self.trial_parameters.append({
+                    this_trial_dict = {
                         'shape': shape,
                         'side': side,
-                        'iti' : self.config['inter_trial_interval_min'] + np.random.exponential(self.config['inter_trial_interval_mean']),                        
-                        })
+                        'iti' : self.config['inter_trial_interval_min'] + \
+                        np.random.exponential(self.config['inter_trial_interval_mean']),  
+                        'finger_instruction': self.index_number
+                        }
+                    this_trial_dict.update(self.config)
+                    self.trial_parameters.append(this_trial_dict)
 
+        random.shuffle(self.trial_parameters)
 
-        self.trial_parameters[0]['fixation_duration'] = 30
+        self.trial_parameters[0]['fixation_duration'] = self.config['intro_extro_duration']
+        for tp in self.trial_parameters:
+            tp['wait_duration'] = -0.001
+        self.trial_parameters[0]['wait_duration'] = 1200
+        self.trial_parameters[-1]['iti'] = self.config['intro_extro_duration']
 
     def setup_stimuli(self):
         size_fixation_pix = self.deg2pix(self.config['size_fixation_deg'])
@@ -56,17 +66,17 @@ class LR_IMSession(EyelinkSession):
                                            sf=0)
 
         self.square_stim = visual.Rect(self.screen, 
-                                width=self.deg2pix(self.parameters['shape_size']),
-                                height=self.deg2pix(self.parameters['shape_size']),
-                                lineWidth=self.deg2pix(self.parameters['shape_lw']), 
+                                width=self.deg2pix(self.config['shape_size']),
+                                height=self.deg2pix(self.config['shape_size']),
+                                lineWidth=self.deg2pix(self.config['shape_lw']), 
                                 lineColor='white',
                                 fillColor='red')
 
         self.circle_stim = visual.Circle(self.screen, 
-                                radius=self.deg2pix(self.parameters['shape_size']),
-                                lineWidth=self.deg2pix(self.parameters['shape_lw']), 
+                                radius=self.deg2pix(self.config['shape_size'])/2.0,
+                                lineWidth=self.deg2pix(self.config['shape_lw']), 
                                 lineColor='white',
-                                fillColor='red')
+                                fillColor='green')
 
         self.shape_stims = [self.square_stim, self.circle_stim]
 
@@ -103,7 +113,7 @@ In attesa che lo scanner inizi."""
 
         for trial_id, parameters in enumerate(self.trial_parameters):
 
-            trial = PRTrial(ti=trial_id,
+            trial = LR_IMTrial(ti=trial_id,
                            config=self.config,
                            screen=self.screen,
                            session=self,

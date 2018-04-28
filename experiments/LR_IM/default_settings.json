@@ -2,10 +2,12 @@
 	"size_fixation_deg":0.25,
 	"shape_ecc": 5,
 	"shape_size": 5,
+	"shape_lw": 0.25,
 	"n_trials":20,
 	"fixation_duration": 0.75,
-	"inter_trial_interval_mean": 2,
+	"inter_trial_interval_mean": 1,
 	"inter_trial_interval_min": 2,
 	"intro_extro_duration": 12,
-	"stimulus_duration": 0.125
+	"stimulus_duration": 0.125,
+	"language": "IT"
 }
